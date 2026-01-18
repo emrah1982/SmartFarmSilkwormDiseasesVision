@@ -1,0 +1,68 @@
+# Strawberry Vision - YOLOv8 Training Configuration
+
+# Model selection
+model: yolov8n.pt  # Options: yolov8n.pt, yolov8s.pt, yolov8m.pt, yolov8l.pt, yolov8x.pt
+
+# Training parameters
+epochs: 100
+batch: 16
+imgsz: 640
+device: 0  # GPU device ID (0, 1, 2, ...) or 'cpu'
+workers: 8  # Number of dataloader workers
+
+# Optimizer settings
+optimizer: AdamW  # Options: SGD, Adam, AdamW, RMSProp
+lr0: 0.01         # Initial learning rate
+lrf: 0.01         # Final learning rate (lr0 * lrf)
+momentum: 0.937   # SGD momentum/Adam beta1
+weight_decay: 0.0005  # Optimizer weight decay
+
+# Loss weights
+box: 7.5   # Box loss gain
+cls: 0.5   # Class loss gain
+dfl: 1.5   # DFL loss gain
+
+# Data augmentation
+hsv_h: 0.015      # HSV-Hue augmentation (fraction)
+hsv_s: 0.7        # HSV-Saturation augmentation (fraction)
+hsv_v: 0.4        # HSV-Value augmentation (fraction)
+degrees: 10.0     # Image rotation (+/- deg)
+translate: 0.1    # Image translation (+/- fraction)
+scale: 0.5        # Image scale (+/- gain)
+shear: 0.0        # Image shear (+/- deg)
+perspective: 0.0  # Image perspective (+/- fraction)
+flipud: 0.0       # Image flip up-down (probability)
+fliplr: 0.5       # Image flip left-right (probability)
+mosaic: 1.0       # Mosaic augmentation (probability)
+mixup: 0.1        # Mixup augmentation (probability)
+copy_paste: 0.0   # Copy-paste augmentation (probability)
+
+# Validation settings
+val: true         # Validate during training
+save: true        # Save checkpoints
+save_period: 10   # Save checkpoint every x epochs
+plots: true       # Save plots and images
+conf: 0.25        # Confidence threshold for predictions
+iou: 0.7          # IoU threshold for NMS
+
+# Advanced settings
+patience: 50      # Early stopping patience (epochs)
+resume: false     # Resume training from last checkpoint
+amp: true         # Automatic Mixed Precision training
+fraction: 1.0     # Dataset fraction to train on
+profile: false    # Profile ONNX and TensorRT speeds
+freeze: null      # Freeze layers (e.g., [0, 1, 2])
+multi_scale: false # Multi-scale training
+
+# Project settings
+project: runs/train  # Project directory
+name: strawberry_exp # Experiment name
+exist_ok: false      # Overwrite existing experiment
+pretrained: true     # Use pretrained model
+verbose: true        # Verbose output
+seed: 0              # Random seed for reproducibility
+deterministic: true  # Deterministic mode
+single_cls: false    # Train as single-class dataset
+rect: false          # Rectangular training
+cos_lr: false        # Cosine learning rate scheduler
+close_mosaic: 10     # Disable mosaic augmentation for final epochs
