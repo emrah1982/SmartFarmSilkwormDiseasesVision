@@ -298,6 +298,12 @@ lr0: 0.01
 
 ## 🌐 Roboflow Dataset Linkleri
 
+### 🆕 Yeni Dataset (Önerilen)
+- **Direct Download Link**: https://universe.roboflow.com/ds/8stDwYxKHL?key=gAR2BTHYtu
+- **Özellik**: Yeni ve güncel çilek dataset'i
+- **Not**: Notebook'ta SELECTED_DATASET = 1 seçeneği ile kullanılabilir
+
+### Diğer Dataset Seçenekleri
 Önerilen datasetler için `docs/3-RoboflowDatasetKullanimi.md` dosyasına bakın:
 - Strawberry Detection Dataset
 - Strawberry Ripeness Classification

@@ -2,25 +2,32 @@
 
 ## 📦 Önerilen Roboflow Dataset Linkleri
 
-### 1. Strawberry Detection Dataset (Temel)
+### 🆕 1. Yeni Strawberry Dataset (ÖNERİLEN)
+- **Direct Download Link**: https://universe.roboflow.com/ds/8stDwYxKHL?key=gAR2BTHYtu
+- **Sınıflar**: Dataset'e özgü sınıflar (indirildikten sonra analiz edilecek)
+- **Özellik**: Yeni ve güncel dataset, doğrudan download link ile erişim
+- **Kullanım**: Notebook'ta SELECTED_DATASET = 1 seçeneği
+- **Not**: Direct download key kullanılır, workspace/project bilgisi gerekmez
+
+### 2. Strawberry Detection Dataset (Temel)
 - **Link**: https://universe.roboflow.com/strawberry-detection/strawberry-detection-dataset
 - **Sınıflar**: strawberry
 - **Görüntü Sayısı**: ~500-1000
 - **Kullanım**: Temel çilek tespiti için
 
-### 2. Strawberry Ripeness Classification
+### 3. Strawberry Ripeness Classification
 - **Link**: https://universe.roboflow.com/fruit-detection/strawberry-ripeness
 - **Sınıflar**: ripe, unripe, semi-ripe
 - **Görüntü Sayısı**: ~800+
 - **Kullanım**: Olgunluk sınıflandırması için ideal
 
-### 3. Fruit Detection - Strawberry
+### 4. Fruit Detection - Strawberry
 - **Link**: https://universe.roboflow.com/object-detection/fruit-detection-strawberry
 - **Sınıflar**: strawberry (çeşitli olgunluk durumları)
 - **Görüntü Sayısı**: ~1200+
 - **Kullanım**: Geniş veri çeşitliliği
 
-### 4. Agricultural Strawberry Dataset
+### 5. Agricultural Strawberry Dataset
 - **Link**: https://universe.roboflow.com/agriculture/strawberry-field-detection
 - **Sınıflar**: strawberry_ripe, strawberry_unripe
 - **Görüntü Sayısı**: ~600+
@@ -38,6 +45,14 @@ from roboflow import Roboflow
 rf = Roboflow(api_key="YOUR_API_KEY")
 project = rf.workspace("workspace-name").project("project-name")
 dataset = project.version(1).download("yolov8")
+```
+
+### Direct Download (Yeni Dataset İçin)
+```python
+# Yeni dataset için doğrudan download
+from roboflow import Roboflow
+rf = Roboflow(api_key="YOUR_API_KEY")
+dataset = rf.download_dataset("8stDwYxKHL", "yolov8", location="datasets/roboflow")
 ```
 
 ### Export Formatı

@@ -1,14 +1,15 @@
 # Strawberry Vision - YOLOv8 Dataset Configuration
+# Updated for new Roboflow dataset: https://universe.roboflow.com/ds/8stDwYxKHL?key=gAR2BTHYtu
 
-path: ../datasets/strawberry_processed  # Dataset root directory
-train: images/train  # Train images (relative to 'path')
-val: images/val      # Validation images (relative to 'path')
-test: images/test    # Test images (optional, relative to 'path')
+path: ../datasets/roboflow  # Dataset root directory (updated for new dataset)
+train: train/images  # Train images (relative to 'path')
+val: valid/images    # Validation images (relative to 'path')
+test: test/images    # Test images (optional, relative to 'path')
 
-# Number of classes
+# Number of classes (will be updated after dataset download)
 nc: 3
 
-# Class names (order matters - must match label files)
+# Class names (order matters - will be updated after dataset analysis)
 names:
   0: strawberry_ripe
   1: strawberry_semi_ripe
