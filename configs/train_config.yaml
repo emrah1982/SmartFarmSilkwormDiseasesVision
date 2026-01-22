@@ -23,14 +23,14 @@ cls: 0.5   # Class loss gain
 dfl: 1.5   # DFL loss gain
 
 # Data augmentation
-hsv_h: 0.015      # HSV-Hue augmentation (fraction)
-hsv_s: 0.7        # HSV-Saturation augmentation (fraction)
-hsv_v: 0.4        # HSV-Value augmentation (fraction)
+hsv_h: 0.02       # HSV-Hue augmentation (fraction)
+hsv_s: 0.8        # HSV-Saturation augmentation (fraction)
+hsv_v: 0.5        # HSV-Value augmentation (fraction)
 degrees: 10.0     # Image rotation (+/- deg)
 translate: 0.1    # Image translation (+/- fraction)
-scale: 0.5        # Image scale (+/- gain)
+scale: 0.6        # Image scale (+/- gain)
 shear: 0.0        # Image shear (+/- deg)
-perspective: 0.0  # Image perspective (+/- fraction)
+perspective: 0.001  # Image perspective (+/- fraction)
 flipud: 0.0       # Image flip up-down (probability)
 fliplr: 0.5       # Image flip left-right (probability)
 mosaic: 1.0       # Mosaic augmentation (probability)
@@ -65,4 +65,4 @@ deterministic: true  # Deterministic mode
 single_cls: false    # Train as single-class dataset
 rect: false          # Rectangular training
 cos_lr: false        # Cosine learning rate scheduler
-close_mosaic: 10     # Disable mosaic augmentation for final epochs
+close_mosaic: 20     # Disable mosaic augmentation for final epochs
