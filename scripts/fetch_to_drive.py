@@ -142,8 +142,8 @@ def main() -> int:
     else:
         logger.warning("⚠️ data.yaml bulunamadı. Roboflow paket formatını doğrulayın (format=yolov8).")
 
-    logger.info("\n📝 Eğitim için örnek komut:")
-    logger.info(f"python scripts/train_yolo.py --data \"{(output_dir / 'data.yaml')}\" --config configs/train_config.yaml")
+    logger.info("\n📝 Eğitim için örnek komut (configs üzerinden merkezî YAML kullanımı):")
+    logger.info("python scripts/train_yolo.py --data configs/strawberry_data.yaml --config configs/train_config.yaml")
 
     return 0
 

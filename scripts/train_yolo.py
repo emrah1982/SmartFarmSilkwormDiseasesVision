@@ -154,19 +154,25 @@ def validate_data_yaml(data_yaml: str) -> bool:
 
 
 def resolve_default_data_yaml() -> Optional[str]:
-    """Google Drive'a yüklenen dataset'i otomatik bulur.
+    """Dataset config yolunu otomatik belirler.
     Kontrol sırası:
-    1) Env: DRIVE_DATA_YAML
-    2) configs/drive_dir.txt + dataset/data.yaml
-    3) Colab varsayılan: /content/drive/MyDrive/StrawberryDisease/dataset/data.yaml
-    4) Lokal fallback: datasets/roboflow/data.yaml
+    1) configs/strawberry_data.yaml
+    2) Env: DRIVE_DATA_YAML
+    3) configs/drive_dir.txt + dataset/data.yaml
+    4) Colab varsayılan: /content/drive/MyDrive/StrawberryDisease/dataset/data.yaml
+    5) Lokal fallback: datasets/roboflow/data.yaml
     """
-    # 1) Explicit env
+    # 1) configs/strawberry_data.yaml
+    cfg_candidate = Path("configs") / "strawberry_data.yaml"
+    if cfg_candidate.exists():
+        return str(cfg_candidate)
+
+    # 2) Explicit env
     env_path = os.environ.get("DRIVE_DATA_YAML", "").strip()
     if env_path and os.path.exists(env_path):
         return env_path
 
-    # 2) configs/drive_dir.txt
+    # 3) configs/drive_dir.txt
     try:
         drive_file = Path("configs") / "drive_dir.txt"
         if drive_file.exists():
@@ -178,12 +184,12 @@ def resolve_default_data_yaml() -> Optional[str]:
     except Exception:
         pass
 
-    # 3) Colab default
+    # 4) Colab default
     colab_candidate = Path("/content/drive/MyDrive/StrawberryDisease/dataset/data.yaml")
     if colab_candidate.exists():
         return str(colab_candidate)
 
-    # 4) Lokal fallback
+    # 5) Lokal fallback
     local_candidate = Path("datasets/roboflow/data.yaml")
     if local_candidate.exists():
         return str(local_candidate)
@@ -207,7 +213,7 @@ def main():
     
     data_yaml_path = args.data
     if not data_yaml_path:
-        logger.info("--data verilmedi. Google Drive ve yerel konumlardan data.yaml otomatik aranıyor...")
+        logger.info("--data verilmedi. configs içinden varsayılan data.yaml aranıyor...")
         data_yaml_path = resolve_default_data_yaml()
         if data_yaml_path:
             logger.info(f"Bulunan dataset: {data_yaml_path}")
@@ -215,9 +221,10 @@ def main():
             logger.error(
                 "Dataset bulunamadı. Aşağıdakilerden birini yapın:\n"
                 " - --data ile data.yaml yolunu verin\n"
-                " - configs/drive_dir.txt içinde Drive klasörünü (StrawberryDisease) tanımlayın ve dataset/data.yaml mevcut olsun\n"
-                " - Colab'ta /content/drive/MyDrive/StrawberryDisease/dataset/data.yaml yolunu kullanın\n"
-                " - veya datasets/roboflow/data.yaml oluşturun"
+                " - configs/strawberry_data.yaml dosyasını kullanın veya düzenleyin\n"
+                " - configs/drive_dir.txt içinde Drive klasörünü tanımlayın ve dataset/data.yaml mevcut olsun\n"
+                " - (opsiyonel) Colab'ta /content/drive/MyDrive/StrawberryDisease/dataset/data.yaml yolunu kullanın\n"
+                " - (opsiyonel) datasets/roboflow/data.yaml oluşturun"
             )
             return 1
 
