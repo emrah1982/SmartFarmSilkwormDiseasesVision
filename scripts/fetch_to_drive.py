@@ -3,7 +3,7 @@ Roboflow Universe URL'inden dataset'i indirip Google Drive senkron klasörüne �
 
 Okunan dosyalar:
 - configs/roboflow_url.txt : Roboflow Universe direkt indirme URL'i (https://universe.roboflow.com/ds/... ?key=...)
-- configs/drive_dir.txt    : Hedef Drive klasör yolu (örn: C:\\Users\\User\\Google Drive\\My Drive\\StrawberryVision)
+- configs/drive_dir.txt    : Hedef Drive klasör yolu (örn: C:\\Users\\User\\Google Drive\\My Drive\\StrawberryDisease)
 
 Kullanım:
     python scripts/fetch_to_drive.py

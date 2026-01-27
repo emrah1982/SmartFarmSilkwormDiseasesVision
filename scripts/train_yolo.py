@@ -158,7 +158,7 @@ def resolve_default_data_yaml() -> Optional[str]:
     Kontrol sırası:
     1) Env: DRIVE_DATA_YAML
     2) configs/drive_dir.txt + dataset/data.yaml
-    3) Colab varsayılan: /content/drive/MyDrive/StrawberryVision/dataset/data.yaml
+    3) Colab varsayılan: /content/drive/MyDrive/StrawberryDisease/dataset/data.yaml
     4) Lokal fallback: datasets/roboflow/data.yaml
     """
     # 1) Explicit env
@@ -179,7 +179,7 @@ def resolve_default_data_yaml() -> Optional[str]:
         pass
 
     # 3) Colab default
-    colab_candidate = Path("/content/drive/MyDrive/StrawberryVision/dataset/data.yaml")
+    colab_candidate = Path("/content/drive/MyDrive/StrawberryDisease/dataset/data.yaml")
     if colab_candidate.exists():
         return str(colab_candidate)
 
@@ -215,8 +215,8 @@ def main():
             logger.error(
                 "Dataset bulunamadı. Aşağıdakilerden birini yapın:\n"
                 " - --data ile data.yaml yolunu verin\n"
-                " - configs/drive_dir.txt içinde Drive klasörünü (StrawberryVision) tanımlayın ve dataset/data.yaml mevcut olsun\n"
-                " - Colab'ta /content/drive/MyDrive/StrawberryVision/dataset/data.yaml yolunu kullanın\n"
+                " - configs/drive_dir.txt içinde Drive klasörünü (StrawberryDisease) tanımlayın ve dataset/data.yaml mevcut olsun\n"
+                " - Colab'ta /content/drive/MyDrive/StrawberryDisease/dataset/data.yaml yolunu kullanın\n"
                 " - veya datasets/roboflow/data.yaml oluşturun"
             )
             return 1
