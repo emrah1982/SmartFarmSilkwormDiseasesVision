@@ -4,6 +4,24 @@ Aşağıda sana **doğrudan PDF’e dönüştürülebilecek**, sahada ve akademi
 
 ---
 
+# 🦠 ÇİLEK HASTALIKLARI ETİKETLEME EK REHBERİ (7 Sınıf)
+
+Bu proje, hastalık tespiti için aşağıdaki 7 sınıfı kullanır. Etiketleme yaparken her bir lezyon/hastalık belirtisini kendi sınıfı ile, mümkün olduğunca dar ve lezyonu tam kapsayacak şekilde kutulandırın. Aynı yapraktaki farklı lezyonları ayrı kutularla işaretleyin.
+
+- Angular Leafspot
+- Anthracnose Fruit Rot
+- Blossom Blight
+- Gray Mold
+- Leaf Spot
+- Powdery Mildew Fruit
+- Powdery Mildew Leaf
+
+Genel kurallar:
+- Lezyon dışındaki sağlıklı alanı mümkün olduğunca dahil etmeyin.
+- Çok küçük (<8–10 px) veya belirsiz lezyonları işaretlemeyin; “şüpheli” klasöre alın.
+- Birden çok hastalık aynı yaprak/meyvede olabilir; her sınıf için ayrı kutu çizin.
+- Net sınıf ayrılamıyorsa “Leaf Spot” gibi genel sınıflarla etiketlemekten kaçının; şüpheli olarak işaretleyin.
+
 # 🍓 ÇİLEK GÖRÜNTÜLERİ ETİKETLEME REHBERİ
 
 **(YOLO Tabanlı Olgunluk ve Çiçek Tespiti İçin)**

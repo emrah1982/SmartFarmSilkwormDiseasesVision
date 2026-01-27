@@ -2,12 +2,12 @@
 
 ## 📦 Önerilen Roboflow Dataset Linkleri
 
-### 🆕 1. Yeni Strawberry Dataset (ÖNERİLEN)
-- **Direct Download Link**: https://universe.roboflow.com/ds/8stDwYxKHL?key=gAR2BTHYtu
-- **Sınıflar**: Dataset'e özgü sınıflar (indirildikten sonra analiz edilecek)
-- **Özellik**: Yeni ve güncel dataset, doğrudan download link ile erişim
-- **Kullanım**: Notebook'ta SELECTED_DATASET = 1 seçeneği
-- **Not**: Direct download key kullanılır, workspace/project bilgisi gerekmez
+### 🆕 1. Strawberry Disease Detection (ÖNERİLEN)
+- **Link**: https://universe.roboflow.com/strawberry-disease/strawberry-disease-detection-dataset/dataset/4
+- **Workspace/Project**: `strawberry-disease / strawberry-disease-detection-dataset`
+- **Version**: `4`
+- **Sınıflar (7)**: Angular Leafspot, Anthracnose Fruit Rot, Blossom Blight, Gray Mold, Leaf Spot, Powdery Mildew Fruit, Powdery Mildew Leaf
+- **Export**: YOLOv8
 
 ### 2. Strawberry Detection Dataset (Temel)
 - **Link**: https://universe.roboflow.com/strawberry-detection/strawberry-detection-dataset
@@ -15,7 +15,7 @@
 - **Görüntü Sayısı**: ~500-1000
 - **Kullanım**: Temel çilek tespiti için
 
-### 3. Strawberry Ripeness Classification
+### 3. Strawberry Ripeness Classification (GEÇMİŞ REFERANS)
 - **Link**: https://universe.roboflow.com/fruit-detection/strawberry-ripeness
 - **Sınıflar**: ripe, unripe, semi-ripe
 - **Görüntü Sayısı**: ~800+
@@ -47,12 +47,12 @@ project = rf.workspace("workspace-name").project("project-name")
 dataset = project.version(1).download("yolov8")
 ```
 
-### Direct Download (Yeni Dataset İçin)
+### Roboflow API ile V4 Dataset İndirme (Önerilen)
 ```python
-# Yeni dataset için doğrudan download
 from roboflow import Roboflow
 rf = Roboflow(api_key="YOUR_API_KEY")
-dataset = rf.download_dataset("8stDwYxKHL", "yolov8", location="datasets/roboflow")
+project = rf.workspace("strawberry-disease").project("strawberry-disease-detection-dataset")
+dataset = project.version(4).download("yolov8")
 ```
 
 ### Export Formatı
@@ -61,27 +61,20 @@ dataset = rf.download_dataset("8stDwYxKHL", "yolov8", location="datasets/roboflo
 - ✅ **Preprocessing**: Auto-Orient, Resize (640x640)
 - ✅ **Augmentation**: Roboflow'da veya kod içinde
 
-### Sınıf Adı Standardizasyonu
-Roboflow'dan indirilen datasette sınıf adları farklı olabilir. Bizim projede kullanılacak standart:
-- `strawberry_ripe` → Olgun çilek
-- `strawberry_semi_ripe` → Yarı olgun çilek
-- `strawberry_unripe` → Olgun olmayan çilek
+### Sınıf Adı Standardizasyonu (7 Hastalık Sınıfı)
+Bu projede kullanılacak final sınıf adları:
+- Angular Leafspot
+- Anthracnose Fruit Rot
+- Blossom Blight
+- Gray Mold
+- Leaf Spot
+- Powdery Mildew Fruit
+- Powdery Mildew Leaf
 
 ## 🔄 Sınıf Yeniden Etiketleme Stratejisi
 
 ### 1. Otomatik Mapping
-Roboflow'dan gelen sınıfları otomatik olarak bizim standarda çevir:
-
-```python
-CLASS_MAPPING = {
-    "ripe": "strawberry_ripe",
-    "semi-ripe": "strawberry_semi_ripe",
-    "semi_ripe": "strawberry_semi_ripe",
-    "unripe": "strawberry_unripe",
-    "green": "strawberry_unripe",
-    "strawberry": "strawberry_ripe",  # Varsayılan
-}
-```
+Roboflow v4 hastalık dataseti sınıf adları zaten standardize edilmiştir. Farklı isimlerle gelen özel datasetleri bu 7 sınıfa eşlemek için manuel kurallar tanımlanabilir (opsiyonel).
 
 ### 2. Label Dosyası Güncelleme
 YOLO formatındaki `.txt` dosyalarında sınıf ID'lerini güncelle:
@@ -90,10 +83,19 @@ YOLO formatındaki `.txt` dosyalarında sınıf ID'lerini güncelle:
 
 ### 3. data.yaml Güncelleme
 ```yaml
-names:
-  0: strawberry_ripe
-  1: strawberry_semi_ripe
-  2: strawberry_unripe
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 7
+names: ['Angular Leafspot', 'Anthracnose Fruit Rot', 'Blossom Blight', 'Gray Mold', 'Leaf Spot', 'Powdery Mildew Fruit', 'Powdery Mildew Leaf']
+
+roboflow:
+  workspace: strawberry-disease
+  project: strawberry-disease-detection-dataset
+  version: 4
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/strawberry-disease/strawberry-disease-detection-dataset/dataset/4
 ```
 
 ## 🎨 Augmentation Stratejisi
@@ -166,16 +168,12 @@ Her sınıf için minimum:
 
 ### data.yaml (Dataset Config)
 ```yaml
-path: /path/to/dataset  # Dataset root
-train: images/train     # Train images
-val: images/val         # Validation images
-test: images/test       # Test images (optional)
+train: ../train/images
+val: ../valid/images
+test: ../test/images
 
-nc: 3  # Number of classes
-names:
-  0: strawberry_ripe
-  1: strawberry_semi_ripe
-  2: strawberry_unripe
+nc: 7
+names: ['Angular Leafspot', 'Anthracnose Fruit Rot', 'Blossom Blight', 'Gray Mold', 'Leaf Spot', 'Powdery Mildew Fruit', 'Powdery Mildew Leaf']
 ```
 
 ### Eğitim Parametreleri

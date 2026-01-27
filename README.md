@@ -5,7 +5,7 @@ Google Colab uyumlu, katmanlı mimariye sahip profesyonel çilek tespit ve olgun
 ## 🎯 Özellikler
 
 - ✅ YOLOv8 tabanlı çilek tespiti
-- ✅ Olgunluk sınıflandırması (ripe, semi-ripe, unripe)
+- ✅ Çilek hastalık tespiti (7 sınıf)
 - ✅ Nesne takibi (tracking)
 - ✅ Otomatik sayım ve istatistik
 - ✅ Görselleştirme ve sonuç kaydetme
@@ -269,14 +269,12 @@ Proje Domain-Driven Design prensiplerine göre 4 katmana ayrılmıştır:
 
 ### Dataset Config (strawberry_data.yaml)
 ```yaml
-path: ../datasets/strawberry_processed
-train: images/train
-val: images/val
-nc: 3
-names:
-  0: strawberry_ripe
-  1: strawberry_semi_ripe
-  2: strawberry_unripe
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 7
+names: ['Angular Leafspot', 'Anthracnose Fruit Rot', 'Blossom Blight', 'Gray Mold', 'Leaf Spot', 'Powdery Mildew Fruit', 'Powdery Mildew Leaf']
 ```
 
 ### Eğitim Config (train_config.yaml)
@@ -290,25 +288,23 @@ lr0: 0.01
 # ... (detaylar için config dosyasına bakın)
 ```
 
-## 📊 Sınıf Tanımları
+## 📊 Hastalık Sınıfları
 
-- **strawberry_ripe**: Olgun çilek (kırmızı renk baskın, hasada hazır)
-- **strawberry_semi_ripe**: Yarı olgun çilek (kırmızı-beyaz karışımı)
-- **strawberry_unripe**: Olgun olmayan çilek (yeşil veya açık beyaz)
+- Angular Leafspot
+- Anthracnose Fruit Rot
+- Blossom Blight
+- Gray Mold
+- Leaf Spot
+- Powdery Mildew Fruit
+- Powdery Mildew Leaf
 
-## 🌐 Roboflow Dataset Linkleri
+## 🌐 Roboflow Dataset Bilgisi
 
-### 🆕 Yeni Dataset (Önerilen)
-- **Direct Download Link**: https://universe.roboflow.com/ds/8stDwYxKHL?key=gAR2BTHYtu
-- **Özellik**: Yeni ve güncel çilek dataset'i
-- **Not**: Notebook'ta SELECTED_DATASET = 1 seçeneği ile kullanılabilir
-
-### Diğer Dataset Seçenekleri
-Önerilen datasetler için `docs/3-RoboflowDatasetKullanimi.md` dosyasına bakın:
-- Strawberry Detection Dataset
-- Strawberry Ripeness Classification
-- Fruit Detection - Strawberry
-- Agricultural Strawberry Dataset
+- Workspace: `strawberry-disease`
+- Project: `strawberry-disease-detection-dataset`
+- Version: `4`
+- License: `CC BY 4.0`
+- URL: https://universe.roboflow.com/strawberry-disease/strawberry-disease-detection-dataset/dataset/4
 
 ## 🤝 Katkıda Bulunma
 
