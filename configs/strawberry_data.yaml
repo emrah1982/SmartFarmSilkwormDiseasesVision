@@ -1,34 +1,16 @@
 # Strawberry Vision - YOLOv8 Dataset Configuration
-# Updated for new Roboflow dataset: https://universe.roboflow.com/ds/8stDwYxKHL?key=gAR2BTHYtu
+# Updated for Strawberry Disease detection classes (Roboflow v4)
 
-path: ../datasets/roboflow  # Dataset root directory (updated for new dataset)
-train: train/images  # Train images (relative to 'path')
-val: valid/images    # Validation images (relative to 'path')
-test: test/images    # Test images (optional, relative to 'path')
+train: ../train/images
+val: ../valid/images
+test: ../test/images
 
-# Number of classes (will be updated after dataset download)
-nc: 3
+nc: 7
+names: ['Angular Leafspot', 'Anthracnose Fruit Rot', 'Blossom Blight', 'Gray Mold', 'Leaf Spot', 'Powdery Mildew Fruit', 'Powdery Mildew Leaf']
 
-# Class names (order matters - will be updated after dataset analysis)
-names:
-  0: strawberry_ripe
-  1: strawberry_semi_ripe
-  2: strawberry_unripe
-
-# Class descriptions
-class_info:
-  strawberry_ripe: "Olgun çilek - kırmızı renk baskın, hasada hazır"
-  strawberry_semi_ripe: "Yarı olgun çilek - kırmızı-beyaz karışımı"
-  strawberry_unripe: "Olgun olmayan çilek - yeşil veya açık beyaz"
-
-# Dataset statistics (optional - for reference)
-dataset_stats:
-  total_images: 1000
-  train_images: 700
-  val_images: 200
-  test_images: 100
-  
-  class_distribution:
-    strawberry_ripe: 400
-    strawberry_semi_ripe: 300
-    strawberry_unripe: 300
+roboflow:
+  workspace: strawberry-disease
+  project: strawberry-disease-detection-dataset
+  version: 4
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/strawberry-disease/strawberry-disease-detection-dataset/dataset/4

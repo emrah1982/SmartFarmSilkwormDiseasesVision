@@ -1,6 +1,8 @@
 from typing import List, Tuple
 
 import numpy as np
+import yaml
+from pathlib import Path
 
 from strawberry_vision.domain.entities import Detection, Ripeness
 
@@ -13,6 +15,20 @@ except Exception:  # pragma: no cover
 class YOLODetector:
     def __init__(self, model_path: str | None = None) -> None:
         self.model = None
+        self.class_names: list[str] = []
+
+        try:
+            project_root = Path(__file__).resolve().parents[2]
+            data_yaml_path = project_root / 'configs' / 'strawberry_data.yaml'
+            if data_yaml_path.exists():
+                with open(data_yaml_path, 'r', encoding='utf-8') as f:
+                    data_cfg = yaml.safe_load(f) or {}
+                    names = data_cfg.get('names')
+                    if isinstance(names, list):
+                        self.class_names = [str(n) for n in names]
+        except Exception:
+            self.class_names = []
+
         if YOLO is not None and model_path:
             try:
                 self.model = YOLO(model_path)
@@ -32,7 +48,13 @@ class YOLODetector:
                 for b in r.boxes:
                     x1, y1, x2, y2 = b.xyxy[0].tolist()
                     w, h = int(x2 - x1), int(y2 - y1)
-                    det = Detection(bbox=(int(x1), int(y1), w, h), score=float(b.conf[0]), label=str(int(b.cls[0])))
+                    cls_id = int(b.cls[0])
+                    label = (
+                        self.class_names[cls_id]
+                        if 0 <= cls_id < len(self.class_names)
+                        else str(cls_id)
+                    )
+                    det = Detection(bbox=(int(x1), int(y1), w, h), score=float(b.conf[0]), label=label)
                     detections.append(det)
             return detections
         except Exception:

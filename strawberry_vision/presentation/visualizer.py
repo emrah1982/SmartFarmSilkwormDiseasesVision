@@ -46,7 +46,7 @@ class Visualizer:
             cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
             
             # Label
-            label_parts = [s.ripeness.value]
+            label_parts = [s.detection.label, s.ripeness.value]
             if self.show_confidence:
                 label_parts.append(f"{s.detection.score:.2f}")
             if self.show_id and s.is_tracked():
