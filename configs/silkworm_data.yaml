@@ -1,6 +1,8 @@
-train: ../dataset/train/images
-val: ../dataset/valid/images
-test: ../dataset/test/images
+
+path:../dataset
+train: train/images
+val: valid/images
+test:test/images
 
 nc: 2
 names: ['Grasserie', 'Healthy']
