@@ -19,7 +19,10 @@ class YOLODetector:
 
         try:
             project_root = Path(__file__).resolve().parents[2]
-            data_yaml_path = project_root / 'configs' / 'strawberry_data.yaml'
+            silkworm_yaml_path = project_root / 'configs' / 'silkworm_data.yaml'
+            strawberry_yaml_path = project_root / 'configs' / 'strawberry_data.yaml'
+
+            data_yaml_path = silkworm_yaml_path if silkworm_yaml_path.exists() else strawberry_yaml_path
             if data_yaml_path.exists():
                 with open(data_yaml_path, 'r', encoding='utf-8') as f:
                     data_cfg = yaml.safe_load(f) or {}

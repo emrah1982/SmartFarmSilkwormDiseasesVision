@@ -1,8 +1,8 @@
 """
-Eğitilmiş YOLOv8 modelini değerlendirme scripti.
+Eğitilmiş YOLO26 modelini değerlendirme scripti.
 
 Usage:
-    python scripts/evaluate_model.py --model runs/train/strawberry_exp/weights/best.pt --data configs/strawberry_data.yaml
+    python scripts/evaluate_model.py --model runs/train/yolo26/weights/best.pt --data configs/silkworm_data.yaml
 """
 
 import argparse
@@ -69,7 +69,7 @@ def evaluate_model(model_path: str, data_yaml: str, split: str = 'val') -> bool:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="YOLOv8 model değerlendirme")
+    parser = argparse.ArgumentParser(description="YOLO26 model değerlendirme")
     parser.add_argument("--model", type=str, required=True, help="Model dosyası (.pt)")
     parser.add_argument("--data", type=str, required=True, help="Dataset YAML dosyası")
     parser.add_argument("--split", type=str, default='val', choices=['val', 'test'], help="Değerlendirme split'i")

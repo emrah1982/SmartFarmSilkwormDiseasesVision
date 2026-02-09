@@ -1,7 +1,7 @@
-# Strawberry Vision - YOLOv8 Training Configuration
+# Strawberry Vision - YOLO26 Training Configuration
 
 # Model selection
-model: yolov8n.pt  # Options: yolov8n.pt, yolov8s.pt, yolov8m.pt, yolov8l.pt, yolov8x.pt
+model: yolo26n.pt  # Options: yolo26n.pt, yolo26s.pt, yolo26m.pt, yolo26l.pt, yolo26x.pt
 
 # Training parameters
 epochs: 100
@@ -56,7 +56,7 @@ multi_scale: false # Multi-scale training
 
 # Project settings
 project: runs/train  # Project directory
-name: strawberry_exp # Experiment name
+name: yolo26 # Experiment name
 exist_ok: false      # Overwrite existing experiment
 pretrained: true     # Use pretrained model
 verbose: true        # Verbose output

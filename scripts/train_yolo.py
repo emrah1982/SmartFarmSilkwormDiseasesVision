@@ -44,7 +44,7 @@ def train_yolo(data_yaml: str, config: Dict[str, Any]) -> bool:
         return False
     
     try:
-        model_name = config.get('model', 'yolov8n.pt')
+        model_name = config.get('model', 'yolo26n.pt')
         logger.info(f"Model yükleniyor: {model_name}")
         model = YOLO(model_name)
         
@@ -156,13 +156,19 @@ def validate_data_yaml(data_yaml: str) -> bool:
 def resolve_default_data_yaml() -> Optional[str]:
     """Dataset config yolunu otomatik belirler.
     Kontrol sırası:
-    1) configs/strawberry_data.yaml
+    1) configs/silkworm_data.yaml
+    2) configs/strawberry_data.yaml
     2) Env: DRIVE_DATA_YAML
     3) configs/drive_dir.txt + dataset/data.yaml
-    4) Colab varsayılan: /content/drive/MyDrive/StrawberryDisease/dataset/data.yaml
+    4) Colab varsayılan: /content/drive/MyDrive/SilkwormDiseasesVision/dataset/data.yaml
     5) Lokal fallback: datasets/roboflow/data.yaml
     """
-    # 1) configs/strawberry_data.yaml
+    # 1) configs/silkworm_data.yaml
+    cfg_candidate = Path("configs") / "silkworm_data.yaml"
+    if cfg_candidate.exists():
+        return str(cfg_candidate)
+
+    # 2) configs/strawberry_data.yaml
     cfg_candidate = Path("configs") / "strawberry_data.yaml"
     if cfg_candidate.exists():
         return str(cfg_candidate)
@@ -185,7 +191,7 @@ def resolve_default_data_yaml() -> Optional[str]:
         pass
 
     # 4) Colab default
-    colab_candidate = Path("/content/drive/MyDrive/StrawberryDisease/dataset/data.yaml")
+    colab_candidate = Path("/content/drive/MyDrive/SilkwormDiseasesVision/dataset/data.yaml")
     if colab_candidate.exists():
         return str(colab_candidate)
 
@@ -198,11 +204,11 @@ def resolve_default_data_yaml() -> Optional[str]:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="YOLOv8 model eğitimi")
+    parser = argparse.ArgumentParser(description="YOLO26 model eğitimi")
     parser.add_argument("--data", type=str, required=False, help="Dataset YAML dosyası")
     parser.add_argument("--config", type=str, default=None, help="Eğitim config YAML dosyası")
     
-    parser.add_argument("--model", type=str, default=None, help="Model adı (yolov8n.pt, yolov8s.pt, ...)")
+    parser.add_argument("--model", type=str, default=None, help="Model adı (yolo26n.pt, yolo26s.pt, ...)")
     parser.add_argument("--epochs", type=int, default=None, help="Epoch sayısı")
     parser.add_argument("--batch", type=int, default=None, help="Batch size")
     parser.add_argument("--imgsz", type=int, default=None, help="Görüntü boyutu")
@@ -221,9 +227,10 @@ def main():
             logger.error(
                 "Dataset bulunamadı. Aşağıdakilerden birini yapın:\n"
                 " - --data ile data.yaml yolunu verin\n"
-                " - configs/strawberry_data.yaml dosyasını kullanın veya düzenleyin\n"
+                " - configs/silkworm_data.yaml dosyasını kullanın veya düzenleyin\n"
+                " - (alternatif) configs/strawberry_data.yaml dosyasını kullanın veya düzenleyin\n"
                 " - configs/drive_dir.txt içinde Drive klasörünü tanımlayın ve dataset/data.yaml mevcut olsun\n"
-                " - (opsiyonel) Colab'ta /content/drive/MyDrive/StrawberryDisease/dataset/data.yaml yolunu kullanın\n"
+                " - (opsiyonel) Colab'ta /content/drive/MyDrive/SilkwormDiseasesVision/dataset/data.yaml yolunu kullanın\n"
                 " - (opsiyonel) datasets/roboflow/data.yaml oluşturun"
             )
             return 1
