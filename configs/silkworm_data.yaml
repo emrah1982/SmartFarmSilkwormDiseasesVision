@@ -1,4 +1,4 @@
-path: "../dataset"
+path: "/content/drive/MyDrive/SilkwormDiseasesVision/dataset"
 train: "train/images"
 val: "valid/images"
 test: "test/images"
