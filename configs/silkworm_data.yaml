@@ -1,15 +1,16 @@
-
-path:../dataset
-train: train/images
-val: valid/images
-test:test/images
+path: "../dataset"
+train: "train/images"
+val: "valid/images"
+test: "test/images"
 
 nc: 2
-names: ['Grasserie', 'Healthy']
+names:
+  - "Grasserie"
+  - "Healthy"
 
 roboflow:
-  workspace: silkworm-annotation-y6ztu
-  project: silkworm-diseases-y0bro
+  workspace: "silkworm-annotation-y6ztu"
+  project: "silkworm-diseases-y0bro"
   version: 1
-  license: CC BY 4.0
-  url: https://universe.roboflow.com/silkworm-annotation-y6ztu/silkworm-diseases-y0bro/dataset/1
+  license: "CC BY 4.0"
+  url: "https://universe.roboflow.com/silkworm-annotation-y6ztu/silkworm-diseases-y0bro/dataset/1"
